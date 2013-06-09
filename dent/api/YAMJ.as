@@ -56,12 +56,11 @@ class dent.api.YAMJ {
 	public static function load_genres(callback) {
 		trace("loading genre list");
 
-		Server.get("genres",YAMJ.process_genres, callback);
+		Server.yamj("genres",YAMJ.process_genres, callback);
 	}
 
 	public static function process_genres(success, data, callback) {
 		if(success) {
-
 			delete Common.genres;
 			Common.genres=new Object();
 
@@ -88,7 +87,7 @@ class dent.api.YAMJ {
 	public static function load_studios(callback) {
 		trace("loading studio list");
 
-		Server.get("studios",YAMJ.process_studios, callback);
+		Server.yamj("studios",YAMJ.process_studios, callback);
 	}
 
 	public static function process_studios(success, data, callback) {
@@ -120,7 +119,7 @@ class dent.api.YAMJ {
 	public static function load_certifications(callback) {
 		trace("loading certifications list");
 
-		Server.get("certifications",YAMJ.process_certifications, callback);
+		Server.yamj("certifications",YAMJ.process_certifications, callback);
 	}
 
 	public static function process_certifications(success, data, callback) {

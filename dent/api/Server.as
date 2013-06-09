@@ -127,26 +127,30 @@ class dent.api.Server {
 	}
 
 // ************ ON DEMAND CALLS
-	public static function retrieve(from, finalcallback) {
-		trace("server call: "+from);
-		Server.get(from, Server.capi_data, finalcallback);
+	public static function yamj(from, finalcallback, finalpassthrough) {
+		trace("yamj server call: "+from);
+		Server.get(from, Server.yapi_data, finalcallback, finalpassthrough);
 	}
 
-	public static function capi_data(success, data, finalcallback, from) {
+	public static function yapi_data(success, data, finalcallback, finalpassthrough, from) {
 		if(success) {
-			if(data['status']) {
-				finalcallback(true, data['data'], data['message']);
+			if(data.status.status == 200) {
+				var ret=new Object();
+				ret.count = data.count;
+				ret.results=data.results;
+				finalcallback(true, ret, finalpassthrough, data.status.message);
 			} else {
-				finalcallback(false, null, data['message']);
+				trace("yamj api error "+data.status.status+" : "+data.status.message);
+				finalcallback(false, null, finalpassthrough, data.status.message);
 			}
 		} else {
 			trace("bad load for "+from);
-			finalcallback(false, null, "failed to load: "+from);
+			finalcallback(false, null, finalpassthrough, "failed to load: "+from);
 		}
 	}
 
-	public static function get(command, callback, finalcallback) {
-		UltraLoader.json(Util.fix_url(command), null, 2, callback, finalcallback);
+	public static function get(command, callback, finalcallback, finalpassthrough) {
+		UltraLoader.json(Util.fix_url(command), null, 2, callback, finalcallback, finalpassthrough);
 	}
 
 }

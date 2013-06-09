@@ -88,11 +88,12 @@ class dent.tools.UltraLoader {
 	}
 
 	// json
-	public static function json(url, options, priority, callback, passthrough) {
+	public static function json(url, options, priority, callback, passthrough, finalpassthrough) {
 		var o:Object=def_queue('j');
 		o.url=url;
 		o.callback=callback;
 		o.passthrough=passthrough;
+		o.finalpassthrough=finalpassthrough;
 
 		merge_options(o, options);
 
@@ -123,12 +124,13 @@ class dent.tools.UltraLoader {
 	private static function def_queue(t) {
 		var o:Object=new Object();
 
-		o.callback=null;	  // callback when done
-		o.passthrough=null;	  // passthrough callback
-		o.added=new Date();   // timestamp when added
-		o.t=t; 				  // type of load
-		o.retries=0;		  // # of retries left
-		o.data=null;		  // result data
+		o.callback=null;	  		// callback when done
+		o.passthrough=null;	  		// passthrough callback
+		o.finalpassthrough=null;	// passthrough callback
+		o.added=new Date();   		// timestamp when added
+		o.t=t; 				  		// type of load
+		o.retries=0;		  		// # of retries left
+		o.data=null;		  		// result data
 
 		switch(t) {
 			case 'i':				// images
@@ -413,10 +415,10 @@ class dent.tools.UltraLoader {
 	public static function load_done(success, l) {
 		if(success) {
 			trace("done");
-			l.callback(true, l.data, l.passthrough);
+			l.callback(true, l.data, l.passthrough, l.finalpassthrough);
 		} else {
 			trace("errored");
-			l.callback(false, l.data, l.passthrough);
+			l.callback(false, l.data, l.passthrough,l.finalpassthrough);
 		}
 
 		delete l;

@@ -79,7 +79,7 @@ class dent.ssbg {
 
 	public static function load(url) {
 		trace("SSBG: "+url);
-		Server.retrieve(url, ssbg.loaded);
+		//Server.retrieve(url, ssbg.loaded);
 	}
 
 	public static function loaded(success, data) {
