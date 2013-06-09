@@ -30,6 +30,11 @@ class dent.Common {
 	public static var ready:Boolean=false;
 	public static var core:Core=null;
 
+	// yamj data
+	public static var genres:Object=null;
+	public static var studios:Object=null;
+	public static var certifications:Object=null;
+
     // reset.
 	public static function reset() {
 		delete Common.runtime;
@@ -42,6 +47,14 @@ class dent.Common {
 
 		core.cleanup();
 		UltraLoader.cleanup();
+
+		delete Common.genres;
+		Common.genres=new Object();
+		delete Common.studios;
+		Common.studios=new Object();
+		delete Common.certifications;
+		Common.certifications=new Object();
+
 		// api is not reset
 	}
 

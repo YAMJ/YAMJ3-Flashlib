@@ -22,6 +22,7 @@ import dent.tools.Util;
 import dent.api.Control;
 import dent.api.Hardware;
 import dent.api.RemoteControl;
+import dent.api.YAMJ;
 
 class dent.api.Server {
 // ************ CONNECT
@@ -43,8 +44,10 @@ class dent.api.Server {
 		if(success) {
 			trace(data);
 			if(StringUtil.beginsWith(data.moduleName, "YAMJ")) {
-				trace("YAMJ SERVER!!!  WOOHOO");
+				trace("YAMJ SERVER!!!");
 
+				// load everything up
+				YAMJ.load_all();
 				callback(true);
 			} else {
 				trace("Not a YAMJ Server");
@@ -141,4 +144,5 @@ class dent.api.Server {
 	public static function get(command, callback, finalcallback) {
 		UltraLoader.json(Util.fix_url(command), null, 2, callback, finalcallback);
 	}
+
 }
