@@ -4,6 +4,7 @@
 
 com/syabas/*
 *.phf
+*.swf
 debug.xml
 flashlib.xml
 test.xml
