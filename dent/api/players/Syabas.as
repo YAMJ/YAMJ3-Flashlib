@@ -140,7 +140,7 @@ class dent.api.players.Syabas extends Playerapi {
 
 	private function after_detect(success, xml, errorcode, callback) {
 		if(success) {
-			//trace("found "+xml);
+			trace("found "+xml);
 
 			// name
 			var temp:String=XPathAPI.selectSingleNode(xml.firstChild, "/theDavidBox/response/name").firstChild.nodeValue.toString();
