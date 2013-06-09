@@ -47,8 +47,8 @@ class dent.api.Server {
 				trace("YAMJ SERVER!!!");
 
 				// load everything up
-				YAMJ.load_all();
-				callback(true);
+				Dialog.update_splash('Loading data from YAMJ');
+				YAMJ.load_all(Server.setupdone, callback);
 			} else {
 				trace("Not a YAMJ Server");
 				callback(false);
@@ -57,6 +57,10 @@ class dent.api.Server {
 			trace("Not a YAMJ Server");
 			callback(false);
 		}
+	}
+
+	public static function setupdone(callback) {
+		callback(true);
 	}
 
 

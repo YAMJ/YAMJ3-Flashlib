@@ -19,13 +19,37 @@ import dent.tools.Util;
 import dent.api.Server;
 
 class dent.api.YAMJ {
-	public static function load_all() {
+	public static var all_cb:Function=null;
+	public static var all_pt:Function=null;
+
+// ************** quick loads
+	public static function load_all_blind() {
 	    // blind first load call to get all the data
 
 		YAMJ.load_genres();
 		YAMJ.load_studios();
 		YAMJ.load_certifications();
 	}
+
+	public static function load_all(callback, passthrough) {
+		YAMJ.all_cb=callback;
+		YAMJ.all_pt=passthrough;
+
+		YAMJ.load_genres(YAMJ.studionext);
+	}
+
+	public static function studionext() {
+		YAMJ.load_studios(YAMJ.certnext);
+	}
+
+	public static function certnext() {
+		YAMJ.load_certifications();
+
+		// done
+		YAMJ.all_cb(YAMJ.all_pt);
+	}
+
+
 
 // ************** GENRES
 
