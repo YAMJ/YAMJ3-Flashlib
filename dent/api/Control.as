@@ -34,13 +34,13 @@ class dent.api.Control {
 // **************** Communicate
 
 	public static function fromHardware(command) {
-		var d=command.toString();
-		trace('HW SOCKET: '+d);
+		trace("HW SOCKET:");
+		trace(command);
 
-		switch(d) {
-			default:
-				trace("unknown hw socket command: "+d);
-		}
+		// switch(d) {
+			// default:
+				// trace("unknown hw socket command: "+d);
+		// }
 	}
 
 // **************** Control

@@ -66,8 +66,8 @@ class dent.api.players.Syabas extends Playerapi {
 				return;
 			default:
 				// todo: process this, don't just log pass it.
-				var d:String=XPathAPI.selectSingleNode(command.firstChild, "/theDavidBox");
-				this.socketcallback(d);
+				//var d:String=XPathAPI.selectSingleNode(command.firstChild, "/theDavidBox");
+				this.socketcallback(command);
 		}
 	}
 
